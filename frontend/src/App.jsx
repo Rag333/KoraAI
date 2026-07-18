@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Dashboard from "./Dashboard.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
@@ -12,6 +13,7 @@ export default function App() {
   const [lastEvaluation, setLastEvaluation] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isChatting, setIsChatting] = useState(false);
+  const [activeTab, setActiveTab] = useState("chat");
 
   useEffect(() => {
     const messageList = messageListRef.current;
@@ -124,129 +126,150 @@ export default function App() {
         <p className="eyebrow">RAG Dashboard</p>
         <h1>Upload a PDF and chat with your company knowledge base.</h1>
         <p className="hero-copy">
-          This UI keeps the existing Groq plus Pinecone retrieval flow in place
-          and adds a simple document upload and chat experience on top.
+          This UI supports multiple retrieval strategies with inline citations
+          and an evaluation dashboard for strategy comparison.
         </p>
       </section>
 
-      <section className="panel-grid">
-        <form className="panel" onSubmit={handleUpload}>
-          <h2>1. Upload PDF</h2>
-          <label className="upload-box">
-            <span>Select a PDF file</span>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={(event) =>
-                setSelectedFile(event.target.files?.[0] ?? null)
-              }
-            />
-          </label>
-          <button type="submit" disabled={isUploading}>
-            {isUploading ? "Indexing..." : "Upload and Index"}
-          </button>
-          <p className="status-text">
-            {uploadStatus || "Your indexed chunks will be stored in Pinecone."}
-          </p>
-        </form>
+      <nav className="nav-tabs">
+        <button
+          className={`nav-tab ${activeTab === "chat" ? "active" : ""}`}
+          onClick={() => setActiveTab("chat")}
+        >
+          Chat
+        </button>
+        <button
+          className={`nav-tab ${activeTab === "dashboard" ? "active" : ""}`}
+          onClick={() => setActiveTab("dashboard")}
+        >
+          Strategy Dashboard
+        </button>
+      </nav>
 
-        <section className="panel chat-panel">
-          <div className="chat-header">
-            <div>
-              <h2>2. Ask Questions</h2>
-              <p>
-                Chat responses use runtime-selected retrieval and return
-                citations plus evaluation metrics.
-              </p>
-            </div>
-            <div className="strategy-picker">
-              <label>
-                Retrieval strategy
-                <select
-                  value={strategy}
-                  onChange={(event) => setStrategy(event.target.value)}
-                >
-                  <option value="dense">Dense</option>
-                  <option value="sparse">Sparse</option>
-                  <option value="hybrid">Hybrid</option>
-                </select>
-              </label>
-            </div>
-          </div>
-          {lastEvaluation ? (
-            <div className="evaluation-summary">
-              <span>Strategy: {lastEvaluation.strategy}</span>
-              <span>
-                Faithfulness: {(lastEvaluation.faithfulness * 100).toFixed(0)}%
-              </span>
-              <span>
-                Context recall:{" "}
-                {(lastEvaluation.contextRecall * 100).toFixed(0)}%
-              </span>
-              <span>
-                Answer relevancy:{" "}
-                {(lastEvaluation.answerRelevancy * 100).toFixed(0)}%
-              </span>
-            </div>
-          ) : null}
-
-          <div ref={messageListRef} className="message-list">
-            {messages.length === 0 ? (
-              <div className="empty-state">
-                Ask a question after uploading at least one PDF.
-              </div>
-            ) : (
-              messages.map((message, index) => (
-                <article
-                  key={`${message.role}-${index}`}
-                  className={`message message-${message.role}`}
-                >
-                  <p className="message-role">
-                    {message.role === "user" ? "You" : "Assistant"}
-                  </p>
-                  <p>{message.content}</p>
-                  {message.role === "assistant" &&
-                  message.sources?.length > 0 ? (
-                    <div className="source-block">
-                      <p className="source-text">Retrieved chunks:</p>
-                      {message.sources.map((source, index) => (
-                        <details
-                          key={`${source.metadata?.chunkId ?? index}-${index}`}
-                          className="source-entry"
-                        >
-                          <summary>
-                            {source.metadata?.source || "Indexed document"} •{" "}
-                            {source.retrievalMethod || "dense"} • score{" "}
-                            {typeof source.score === "number"
-                              ? source.score.toFixed(2)
-                              : "n/a"}
-                          </summary>
-                          <p className="source-snippet">
-                            {source.pageContent?.slice(0, 280) ?? ""}
-                            {source.pageContent?.length > 280 ? "..." : ""}
-                          </p>
-                        </details>
-                      ))}
-                    </div>
-                  ) : null}
-                </article>
-              ))
-            )}
-          </div>
-
-          <form className="chat-form" onSubmit={handleAsk}>
-            <textarea
-              rows="4"
-              value={question}
-              placeholder="What does the internal policy say about leave approval?"
-              onChange={(event) => setQuestion(event.target.value)}
-            />
-            <button type="submit" disabled={isChatting}>
-              {isChatting ? "Thinking..." : "Send"}
+      {activeTab === "dashboard" ? (
+        <Dashboard />
+      ) : (
+        <section className="panel-grid">
+          <form className="panel" onSubmit={handleUpload}>
+            <h2>1. Upload PDF</h2>
+            <label className="upload-box">
+              <span>Select a PDF file</span>
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={(event) =>
+                  setSelectedFile(event.target.files?.[0] ?? null)
+                }
+              />
+            </label>
+            <button type="submit" disabled={isUploading}>
+              {isUploading ? "Indexing..." : "Upload and Index"}
             </button>
+            <p className="status-text">
+              {uploadStatus ||
+                "Your indexed chunks will be stored in Pinecone."}
+            </p>
           </form>
+
+          <section className="panel chat-panel">
+            <div className="chat-header">
+              <div>
+                <h2>2. Ask Questions</h2>
+                <p>
+                  Chat responses use runtime-selected retrieval and return
+                  citations plus evaluation metrics.
+                </p>
+              </div>
+              <div className="strategy-picker">
+                <label>
+                  Retrieval strategy
+                  <select
+                    value={strategy}
+                    onChange={(event) => setStrategy(event.target.value)}
+                  >
+                    <option value="dense">Dense</option>
+                    <option value="sparse">Sparse</option>
+                    <option value="hybrid">Hybrid</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            {lastEvaluation ? (
+              <div className="evaluation-summary">
+                <span>Strategy: {lastEvaluation.strategy}</span>
+                <span>
+                  Faithfulness: {(lastEvaluation.faithfulness * 100).toFixed(0)}
+                  %
+                </span>
+                <span>
+                  Context recall:{" "}
+                  {(lastEvaluation.contextRecall * 100).toFixed(0)}%
+                </span>
+                <span>
+                  Answer relevancy:{" "}
+                  {(lastEvaluation.answerRelevancy * 100).toFixed(0)}%
+                </span>
+              </div>
+            ) : null}
+
+            <div ref={messageListRef} className="message-list">
+              {messages.length === 0 ? (
+                <div className="empty-state">
+                  Ask a question after uploading at least one PDF.
+                </div>
+              ) : (
+                messages.map((message, index) => (
+                  <article
+                    key={`${message.role}-${index}`}
+                    className={`message message-${message.role}`}
+                  >
+                    <p className="message-role">
+                      {message.role === "user" ? "You" : "Assistant"}
+                    </p>
+                    <p>{message.content}</p>
+                    {message.role === "assistant" &&
+                    message.sources?.length > 0 ? (
+                      <div className="source-block">
+                        <p className="source-text">Retrieved chunks:</p>
+                        {message.sources.map((source, index) => (
+                          <details
+                            key={`${source.metadata?.chunkId ?? index}-${index}`}
+                            className="source-entry"
+                          >
+                            <summary>
+                              {source.metadata?.source || "Indexed document"} •{" "}
+                              {source.retrievalMethod || "dense"} • score{" "}
+                              {typeof source.score === "number"
+                                ? source.score.toFixed(2)
+                                : "n/a"}
+                            </summary>
+                            <p className="source-snippet">
+                              {source.pageContent?.slice(0, 280) ?? ""}
+                              {source.pageContent?.length > 280 ? "..." : ""}
+                            </p>
+                          </details>
+                        ))}
+                      </div>
+                    ) : null}
+                  </article>
+                ))
+              )}
+            </div>
+
+            <form className="chat-form" onSubmit={handleAsk}>
+              <textarea
+                rows="4"
+                value={question}
+                placeholder="What does the internal policy say about leave approval?"
+                onChange={(event) => setQuestion(event.target.value)}
+              />
+              <button type="submit" disabled={isChatting}>
+                {isChatting ? "Thinking..." : "Send"}
+              </button>
+            </form>
+          </section>
         </section>
-      </section>
+      )}
     </main>
   );
 }
