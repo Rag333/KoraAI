@@ -1,0 +1,204 @@
+:root {
+    color-scheme: light;
+    --bg: #f4efe6;
+    --surface: rgba(255, 250, 242, 0.88);
+    --surface-strong: #fffdf9;
+    --text: #1f2933;
+    --muted: #52606d;
+    --accent: #9f4d1f;
+    --accent-dark: #6a2f10;
+    --border: rgba(63, 34, 19, 0.12);
+    --shadow: 0 24px 60px rgba(89, 54, 27, 0.12);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(213, 163, 117, 0.35), transparent 34%),
+        radial-gradient(circle at top right, rgba(87, 143, 126, 0.22), transparent 28%),
+        linear-gradient(180deg, #f8f1e7 0%, #efe4d4 100%);
+}
+
+button,
+textarea,
+input {
+    font: inherit;
+}
+
+.app-shell {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 48px 0;
+}
+
+.hero-card,
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+}
+
+.hero-card {
+    padding: 32px;
+    margin-bottom: 24px;
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.75rem;
+    color: var(--accent);
+}
+
+.hero-card h1,
+.panel h2 {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+.hero-card h1 {
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    line-height: 1;
+    max-width: 14ch;
+}
+
+.hero-copy {
+    max-width: 62ch;
+    margin: 16px 0 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.panel-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    gap: 24px;
+}
+
+.panel {
+    padding: 24px;
+}
+
+.upload-box {
+    display: grid;
+    gap: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px dashed rgba(159, 77, 31, 0.35);
+    border-radius: 18px;
+    background: var(--surface-strong);
+}
+
+.panel button {
+    margin-top: 16px;
+    border: 0;
+    border-radius: 999px;
+    padding: 12px 18px;
+    color: white;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+    cursor: pointer;
+}
+
+.panel button:disabled {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+.status-text,
+.chat-header p,
+.source-text {
+    color: var(--muted);
+}
+
+.chat-panel {
+    display: grid;
+    gap: 16px;
+    min-height: 620px;
+}
+
+.message-list {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    min-height: 360px;
+    max-height: 440px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.message {
+    padding: 16px;
+    border-radius: 18px;
+    line-height: 1.55;
+}
+
+.message p {
+    margin: 0;
+}
+
+.message-role {
+    margin-bottom: 8px !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.message-user {
+    background: #f6decb;
+}
+
+.message-assistant {
+    background: #fffdf9;
+    border: 1px solid rgba(63, 34, 19, 0.08);
+}
+
+.empty-state {
+    padding: 24px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--muted);
+}
+
+.chat-form {
+    display: grid;
+    gap: 12px;
+}
+
+.chat-form textarea {
+    width: 100%;
+    resize: vertical;
+    border: 1px solid rgba(63, 34, 19, 0.12);
+    border-radius: 18px;
+    padding: 16px;
+    background: var(--surface-strong);
+}
+
+@media (max-width: 900px) {
+    .app-shell {
+        width: min(100% - 20px, 100%);
+        padding: 20px 0 28px;
+    }
+
+    .panel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-panel {
+        min-height: auto;
+    }
+
+    .message-list {
+        max-height: 360px;
+    }
+}
