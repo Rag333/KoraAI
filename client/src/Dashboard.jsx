@@ -24,9 +24,16 @@ async function parseJsonResponse(response) {
   const bodyText = await response.text();
   try {
     return JSON.parse(bodyText);
-  } catch {
+  } catch (err) {
+    if (bodyText.trim().startsWith("<!DOCTYPE") || bodyText.trim().startsWith("<html")) {
+      throw new Error(
+        `Backend API connection error: The frontend at Vercel cannot reach your backend API server.\n\n` +
+        `Solution: In your Vercel Project Settings -> Environment Variables, add:\n` +
+        `VITE_API_BASE_URL = https://your-render-backend-url.onrender.com`
+      );
+    }
     throw new Error(
-      `Expected JSON response but received HTML or invalid JSON:\n${bodyText.slice(0, 400)}`,
+      `Expected JSON response but received invalid data:\n${bodyText.slice(0, 300)}`
     );
   }
 }

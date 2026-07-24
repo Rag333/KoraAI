@@ -27,8 +27,17 @@ async function parseJsonResponse(response) {
   try {
     return JSON.parse(bodyText);
   } catch (err) {
+    if (bodyText.trim().startsWith("<!DOCTYPE") || bodyText.trim().startsWith("<html")) {
+      const targetUrl = API_BASE_URL || window.location.origin;
+      throw new Error(
+        `Backend API connection error: Received HTML from ${response.url}.\n\n` +
+        `Cause: The frontend cannot reach the backend API server.\n` +
+        `Solution: In your Vercel / deployment environment variables, add:\n` +
+        `VITE_API_BASE_URL = https://your-render-backend-url.onrender.com`
+      );
+    }
     throw new Error(
-      `Expected JSON response but received HTML or invalid JSON:\n${bodyText.slice(0, 400)}`,
+      `Expected JSON response but received invalid data:\n${bodyText.slice(0, 300)}`
     );
   }
 }
