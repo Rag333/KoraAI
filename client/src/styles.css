@@ -384,19 +384,20 @@ select {
   border-bottom: 1px solid rgba(99, 102, 241, 0.08);
 }
 
-.empty-state-tight {
+.empty-state-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 16px;
-  border-radius: 16px;
-  background: rgba(243, 241, 235, 0.5);
-  border: 1px solid rgba(99, 102, 241, 0.06);
+  padding: 36px 24px;
+  border-radius: 20px;
+  background: rgba(250, 249, 246, 0.85);
+  border: 1px solid rgba(99, 102, 241, 0.12);
   color: var(--muted);
   text-align: center;
   gap: 12px;
-  min-height: 140px;
+  min-height: 220px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 20px rgba(26, 34, 48, 0.02);
 }
 
 .chat-form-tight {
@@ -1303,33 +1304,33 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  height: 48px;
-  margin: 8px 0 20px;
+  gap: 8px;
+  height: 64px;
+  margin: 12px 0 16px;
 }
 
 .visualizer-bar {
-  width: 4px;
-  height: 18px;
+  width: 6px;
+  height: 24px;
   background: linear-gradient(180deg, var(--accent), var(--accent-dark));
   border-radius: 99px;
   animation: visualize 1s ease-in-out infinite alternate;
   transform-origin: center;
 }
 
-.visualizer-bar:nth-child(1) { animation-delay: 0.1s; height: 18px; }
-.visualizer-bar:nth-child(2) { animation-delay: 0.35s; height: 32px; }
-.visualizer-bar:nth-child(3) { animation-delay: 0.6s; height: 24px; }
-.visualizer-bar:nth-child(4) { animation-delay: 0.2s; height: 38px; }
-.visualizer-bar:nth-child(5) { animation-delay: 0.45s; height: 14px; }
+.visualizer-bar:nth-child(1) { animation-delay: 0.1s; height: 26px; }
+.visualizer-bar:nth-child(2) { animation-delay: 0.35s; height: 48px; }
+.visualizer-bar:nth-child(3) { animation-delay: 0.6s; height: 36px; }
+.visualizer-bar:nth-child(4) { animation-delay: 0.2s; height: 56px; }
+.visualizer-bar:nth-child(5) { animation-delay: 0.45s; height: 20px; }
 
 @keyframes visualize {
   0% {
-    transform: scaleY(0.3);
-    opacity: 0.65;
+    transform: scaleY(0.35);
+    opacity: 0.6;
   }
   100% {
-    transform: scaleY(1.4);
+    transform: scaleY(1.5);
     opacity: 1;
   }
 }

@@ -458,8 +458,9 @@ export default function App() {
 
             <div ref={messageListRef} className="message-list">
               {showIntro ? (
-                <div className="empty-state-tight">
-                  <h3 style={{ margin: 0, fontWeight: "800", fontSize: "1.15rem", fontFamily: "Plus Jakarta Sans", color: "var(--text)" }}>Kora-AI RAG Assistant</h3>
+                <div className="empty-state-card">
+                  <h3 style={{ margin: 0, fontWeight: "800", fontSize: "1.45rem", fontFamily: "Plus Jakarta Sans", color: "var(--text)" }}>Kora–AI RAG Assistant</h3>
+                  <p style={{ margin: "6px 0 16px", fontSize: "0.92rem", color: "var(--muted)" }}>Ask questions to retrieve context and synthesize answers</p>
                   
                   {/* Siri/Gemini voice wave visualizer animation */}
                   <div className="ai-visualizer">
