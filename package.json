@@ -1,5 +1,5 @@
 {
-  "name": ".",
+  "name": "kora-ai",
   "main": "server.js",
   "type": "module",
   "scripts": {

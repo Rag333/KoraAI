@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: luna-backend
+    name: kora-backend
     env: node
     buildCommand: npm install
     startCommand: npm start

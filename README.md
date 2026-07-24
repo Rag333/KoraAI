@@ -1,4 +1,4 @@
-# Company Chatbot RAG
+# Kora AI - Production RAG System
 
 This project keeps the original Groq plus Pinecone RAG flow and extends it with:
 

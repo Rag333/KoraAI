@@ -456,7 +456,7 @@ export default function App() {
             <div ref={messageListRef} className="message-list">
               {showIntro ? (
                 <div className="empty-state" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "260px", gap: "12px", padding: "32px 16px" }}>
-                  <h3 style={{ margin: "4px 0 0", fontWeight: "800", fontSize: "1.4rem", fontFamily: "Plus Jakarta Sans", color: "var(--text)" }}>Luna RAG Assistant</h3>
+                  <h3 style={{ margin: "4px 0 0", fontWeight: "800", fontSize: "1.4rem", fontFamily: "Plus Jakarta Sans", color: "var(--text)" }}>Kora AI RAG Assistant</h3>
                   
                   {/* Siri/Gemini voice wave visualizer animation */}
                   <div className="ai-visualizer">
