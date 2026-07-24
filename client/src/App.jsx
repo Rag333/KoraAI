@@ -391,22 +391,11 @@ export default function App() {
 
           <section className="panel chat-panel">
             <div className="chat-header">
-              <div>
-                <h2 style={{ fontSize: "1.35rem", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <Database size={18} /> 2. Ask RAG Bot
-                </h2>
-                <p style={{ fontSize: "0.88rem", margin: "4px 0 0" }}>
-                  Answers include interactive chunk references and performance scores.
-                </p>
+              <div className="chat-header-title">
+                <h2><Database size={17} /> Ask RAG Bot</h2>
+                <span className="chat-header-badge">Llama 3.3 70B</span>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  flexWrap: "wrap",
-                }}
-              >
+              <div className="chat-header-actions">
                 {messages.length > 0 && (
                   <button
                     type="button"
@@ -416,27 +405,25 @@ export default function App() {
                       setLastEvaluation(null);
                       setShowIntro(true);
                     }}
-                    style={{ display: "flex", alignItems: "center", gap: "6px" }}
+                    title="Clear Chat"
                   >
-                    <Trash2 size={13} /> Clear Chat
+                    <Trash2 size={13} /> Clear
                   </button>
                 )}
                 <button
                   type="button"
-                  className="email-button"
+                  className="email-button compact-btn"
                   onClick={() => {
                     window.location.hash = "#/dashboard";
                     setActiveTab("dashboard");
                   }}
-                  style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", padding: "10px 16px" }}
                 >
-                  <BarChart2 size={14} /> Compare models
+                  <BarChart2 size={13} /> Compare
                 </button>
-                <div className="strategy-picker" style={{ minWidth: "140px" }}>
+                <div className="strategy-picker">
                   <select
                     value={strategy}
                     onChange={(event) => setStrategy(event.target.value)}
-                    style={{ margin: 0, padding: "8px 12px", fontSize: "0.85rem" }}
                   >
                     <option value="dense">Dense</option>
                     <option value="sparse">Sparse (BM25)</option>
@@ -445,6 +432,7 @@ export default function App() {
                 </div>
               </div>
             </div>
+
             {lastEvaluation ? (
               <div className="evaluation-summary">
                 <span style={{ gridColumn: "span 2", fontWeight: "700", borderBottom: "1px solid rgba(99,102,241,0.08)", paddingBottom: "6px" }}>
@@ -464,16 +452,29 @@ export default function App() {
 
             <div ref={messageListRef} className="message-list">
               {showIntro ? (
-                <div className="empty-state" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "260px", gap: "12px", padding: "32px 16px" }}>
-                  <h3 style={{ margin: "4px 0 0", fontWeight: "800", fontSize: "1.4rem", fontFamily: "Plus Jakarta Sans", color: "var(--text)" }}>Kora-AI RAG Assistant</h3>
-                  
-                  {/* Siri/Gemini voice wave visualizer animation */}
-                  <div className="ai-visualizer">
-                    <div className="visualizer-bar"></div>
-                    <div className="visualizer-bar"></div>
-                    <div className="visualizer-bar"></div>
-                    <div className="visualizer-bar"></div>
-                    <div className="visualizer-bar"></div>
+                <div className="empty-state-compact">
+                  <div className="ai-visualizer-small">
+                    <Sparkles size={18} />
+                  </div>
+                  <div className="empty-state-text">
+                    <h3>Kora-AI RAG Assistant</h3>
+                    <p>Ask questions about your uploaded documents</p>
+                  </div>
+                  <div className="suggested-prompts">
+                    <button
+                      type="button"
+                      className="prompt-chip"
+                      onClick={() => setQuestion("What are the key points in the document?")}
+                    >
+                      "Key points in document?"
+                    </button>
+                    <button
+                      type="button"
+                      className="prompt-chip"
+                      onClick={() => setQuestion("Summarize the main topics and details")}
+                    >
+                      "Summarize main topics"
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -531,9 +532,9 @@ export default function App() {
               )}
             </div>
 
-            <form className="chat-form" onSubmit={handleAsk}>
+            <form className="chat-form-compact" onSubmit={handleAsk}>
               <textarea
-                rows="4"
+                rows="1"
                 value={question}
                 placeholder="Ask a question about the document..."
                 onChange={(event) => setQuestion(event.target.value)}
@@ -544,9 +545,17 @@ export default function App() {
                   }
                 }}
               />
-              <button type="submit" disabled={isChatting} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
-                <Send size={16} />
-                {isChatting ? "Retrieving & Synthesizing..." : "Ask Bot"}
+              <button
+                type="submit"
+                className="send-icon-btn"
+                disabled={isChatting || !question.trim()}
+                title="Send Question"
+              >
+                {isChatting ? (
+                  <span className="spinner-sm"></span>
+                ) : (
+                  <Send size={15} />
+                )}
               </button>
             </form>
           </section>
