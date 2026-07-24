@@ -1,5 +1,6 @@
 import { retrieve } from "./retrieval-service.js";
 import { answerQuestion } from "./chat-service.js";
+import { appendEvaluation } from "./store.js";
 
 export async function evaluateAllStrategies(question, k = 3) {
   const strategies = ["dense", "sparse", "hybrid"];
@@ -48,7 +49,7 @@ export async function evaluateAllStrategies(question, k = 3) {
       : best,
   );
 
-  return {
+  const payload = {
     question,
     results,
     summary: {
@@ -56,5 +57,16 @@ export async function evaluateAllStrategies(question, k = 3) {
       bestStrategy: bestStrategy.strategy,
       allSucceeded: results.every((r) => !r.error),
     },
+    timestamp: Date.now(),
   };
+
+  try {
+    appendEvaluation(payload);
+  } catch (e) {
+    // non-fatal: persist failure should not break API
+    /* eslint-disable no-console */
+    console.warn("Failed to persist evaluation:", e?.message ?? e);
+  }
+
+  return payload;
 }

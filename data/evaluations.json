@@ -1,0 +1,638 @@
+[
+  {
+    "question": "hi",
+    "results": [
+      {
+        "strategy": "dense",
+        "answer": "It seems like you're looking for information on securing a REST API. Based on the provided context, here are some ways to secure a REST API:\n\n1. **Authentication**: You can use OAuth 2.0, JWT (JSON Web Tokens), or API keys to authenticate users.\n2. **Authorization**: Implement role-based access control (RBAC) to restrict access to certain resources based on user roles.\n3. **CORS (Cross-Origin Resource Sharing)**: Restrict API access to trusted origins to prevent unauthorized access.\n\nAdditionally, you can also consider handling common errors, such as:\n\n- 400 Bad Request: Client error (invalid request)\n- 401 Unauthorized: Authentication required\n- 403 Forbidden: Client does not have access\n- 404 Not Found: Resource does not exist\n- 500 Internal Server Error: Generic server error\n\nIf you have any specific questions about securing a REST API, I'd be happy to help.",
+        "latency": 8592,
+        "evaluation": {
+          "faithfulness": 0.05154639175257732,
+          "contextRecall": 0.5670103092783505,
+          "answerRelevancy": 0.28350515463917525
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.742536545,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          },
+          {
+            "pageContent": "•\nIntegrated TinyMCE editor and Cloudinary to enable rich text and image uploads in blog posts.\n•\nEnsured a consistent global state through Redux Toolkit, simplifying user session data and post fetching logic across the entire\napplication.\n•\nTech Stack:  MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT, Cloudinary, Tailwind CSS\nRag Chat SystemGitHub\n•\nBuilt a RAG-based chatbot for querying PDF documents using semantic search and context-aware response generation.\n•",
+            "score": 0.738585472,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "Off_Campus.pdf-5",
+              "chunkIndex": 5,
+              "source": "Off_Campus.pdf",
+              "uploadedAt": "2026-07-18T10:47:46.801Z"
+            }
+          },
+          {
+            "pageContent": "400 Bad Request – Client error (invalid request) \n401 Unauthorized – Authentication required \n403 Forbidden – Client does not have access \n404 Not Found – Resource does not exist \n500 Internal Server Error – Generic server error \n7. How do you secure a REST API?\nAuthentication:   Use OAuth 2.0, JWT, or API keys \nAuthorization:    Implement role-based access control (RBAC) \nCORS (Cross-Origin Resource Sharing):     Restrict API access to trusted origins",
+            "score": 0.737994254,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "rest api.pdf-7",
+              "chunkIndex": 7,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      },
+      {
+        "strategy": "sparse",
+        "answer": "Hi, how can I help you today?",
+        "latency": 258,
+        "evaluation": {
+          "faithfulness": 0,
+          "contextRecall": 0,
+          "answerRelevancy": 0.5
+        },
+        "retrievedChunks": [],
+        "chunkCount": 0,
+        "error": null
+      },
+      {
+        "strategy": "hybrid",
+        "answer": "It seems like you just said \"hi\" and didn't ask a specific question. If you'd like to ask something, I'd be happy to help based on the context you provided. What's your question?",
+        "latency": 1146,
+        "evaluation": {
+          "faithfulness": 0.1,
+          "contextRecall": 0.23333333333333334,
+          "answerRelevancy": 0.6166666666666667
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.01639344262295082,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          },
+          {
+            "pageContent": "•\nIntegrated TinyMCE editor and Cloudinary to enable rich text and image uploads in blog posts.\n•\nEnsured a consistent global state through Redux Toolkit, simplifying user session data and post fetching logic across the entire\napplication.\n•\nTech Stack:  MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT, Cloudinary, Tailwind CSS\nRag Chat SystemGitHub\n•\nBuilt a RAG-based chatbot for querying PDF documents using semantic search and context-aware response generation.\n•",
+            "score": 0.016129032258064516,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "Off_Campus.pdf-5",
+              "chunkIndex": 5,
+              "source": "Off_Campus.pdf",
+              "uploadedAt": "2026-07-18T10:47:46.801Z"
+            }
+          },
+          {
+            "pageContent": "400 Bad Request – Client error (invalid request) \n401 Unauthorized – Authentication required \n403 Forbidden – Client does not have access \n404 Not Found – Resource does not exist \n500 Internal Server Error – Generic server error \n7. How do you secure a REST API?\nAuthentication:   Use OAuth 2.0, JWT, or API keys \nAuthorization:    Implement role-based access control (RBAC) \nCORS (Cross-Origin Resource Sharing):     Restrict API access to trusted origins",
+            "score": 0.015873015873015872,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "rest api.pdf-7",
+              "chunkIndex": 7,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      }
+    ],
+    "summary": {
+      "avgLatency": 3332,
+      "bestStrategy": "hybrid",
+      "allSucceeded": true
+    },
+    "timestamp": 1784377591270
+  },
+  {
+    "question": "hi",
+    "results": [
+      {
+        "strategy": "dense",
+        "answer": "It seems like you're looking for information on securing a REST API. According to the provided context, to secure a REST API, you should:\n\n1. **Use Authentication**: Utilize OAuth 2.0, JWT (JSON Web Tokens), or API keys to authenticate requests.\n2. **Implement Authorization**: Use role-based access control (RBAC) to ensure that users can only access resources they are authorized to.\n3. **Configure CORS (Cross-Origin Resource Sharing)**: Restrict API access to trusted origins to prevent unauthorized access.\n\nIs there anything else you'd like to know about REST API security or any other topic?",
+        "latency": 10320,
+        "evaluation": {
+          "faithfulness": 0.06756756756756757,
+          "contextRecall": 0.47297297297297297,
+          "answerRelevancy": 0.23648648648648649
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.742536545,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          },
+          {
+            "pageContent": "•\nIntegrated TinyMCE editor and Cloudinary to enable rich text and image uploads in blog posts.\n•\nEnsured a consistent global state through Redux Toolkit, simplifying user session data and post fetching logic across the entire\napplication.\n•\nTech Stack:  MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT, Cloudinary, Tailwind CSS\nRag Chat SystemGitHub\n•\nBuilt a RAG-based chatbot for querying PDF documents using semantic search and context-aware response generation.\n•",
+            "score": 0.738585472,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "Off_Campus.pdf-5",
+              "chunkIndex": 5,
+              "source": "Off_Campus.pdf",
+              "uploadedAt": "2026-07-18T10:47:46.801Z"
+            }
+          },
+          {
+            "pageContent": "400 Bad Request – Client error (invalid request) \n401 Unauthorized – Authentication required \n403 Forbidden – Client does not have access \n404 Not Found – Resource does not exist \n500 Internal Server Error – Generic server error \n7. How do you secure a REST API?\nAuthentication:   Use OAuth 2.0, JWT, or API keys \nAuthorization:    Implement role-based access control (RBAC) \nCORS (Cross-Origin Resource Sharing):     Restrict API access to trusted origins",
+            "score": 0.737994254,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "rest api.pdf-7",
+              "chunkIndex": 7,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      },
+      {
+        "strategy": "sparse",
+        "answer": "Hi, how can I assist you today?",
+        "latency": 426,
+        "evaluation": {
+          "faithfulness": 0,
+          "contextRecall": 0,
+          "answerRelevancy": 0.5
+        },
+        "retrievedChunks": [],
+        "chunkCount": 0,
+        "error": null
+      },
+      {
+        "strategy": "hybrid",
+        "answer": "It seems like you just said \"hi\" and didn't ask a specific question. If you have a question related to the context provided, feel free to ask, and I'll do my best to help. Otherwise, I can just say hi back and wait for your question. How can I assist you today?",
+        "latency": 1667,
+        "evaluation": {
+          "faithfulness": 0.1282051282051282,
+          "contextRecall": 0.2564102564102564,
+          "answerRelevancy": 0.6282051282051282
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.01639344262295082,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          },
+          {
+            "pageContent": "•\nIntegrated TinyMCE editor and Cloudinary to enable rich text and image uploads in blog posts.\n•\nEnsured a consistent global state through Redux Toolkit, simplifying user session data and post fetching logic across the entire\napplication.\n•\nTech Stack:  MongoDB, Express.js, React.js, Node.js, Redux Toolkit, JWT, Cloudinary, Tailwind CSS\nRag Chat SystemGitHub\n•\nBuilt a RAG-based chatbot for querying PDF documents using semantic search and context-aware response generation.\n•",
+            "score": 0.016129032258064516,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "Off_Campus.pdf-5",
+              "chunkIndex": 5,
+              "source": "Off_Campus.pdf",
+              "uploadedAt": "2026-07-18T10:47:46.801Z"
+            }
+          },
+          {
+            "pageContent": "400 Bad Request – Client error (invalid request) \n401 Unauthorized – Authentication required \n403 Forbidden – Client does not have access \n404 Not Found – Resource does not exist \n500 Internal Server Error – Generic server error \n7. How do you secure a REST API?\nAuthentication:   Use OAuth 2.0, JWT, or API keys \nAuthorization:    Implement role-based access control (RBAC) \nCORS (Cross-Origin Resource Sharing):     Restrict API access to trusted origins",
+            "score": 0.015873015873015872,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "rest api.pdf-7",
+              "chunkIndex": 7,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      }
+    ],
+    "summary": {
+      "avgLatency": 4137.666666666667,
+      "bestStrategy": "hybrid",
+      "allSucceeded": true
+    },
+    "timestamp": 1784391696668
+  },
+  {
+    "question": "hi",
+    "results": [
+      {
+        "strategy": "dense",
+        "answer": "Hi. How can I assist you today? Would you like to discuss something related to the provided context, such as academic records or software development components?",
+        "latency": 6958,
+        "evaluation": {
+          "faithfulness": 0.041666666666666664,
+          "contextRecall": 0.20833333333333334,
+          "answerRelevancy": 0.6041666666666666
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Date of Declaration:17/06/26\nCodeNameTypeInternalExternalBack PaperGrade\nBOE084ENTREPRENEURSHIP DEVELOPMENTTheory2737--B\nBOE096DIGITAL AND SOCIAL MEDIA MARKETINGTheory2940--B\nBCS851Project-IIPractical90325--A+\n \nMOOCs Certifications\nFirst Year Marks:1261Second Year Marks:1520\nThird Year Marks:1547Fourth Year Marks:1164\nFirst Year Result:PASSSecond Year Result:PASS\nThird Year Result:PASSFourth Year Result:PASS\nCGPA:7.8MAX CGPA:10\nDivision Awarded:I-DIV",
+            "score": 0.755661964,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-15",
+              "chunkIndex": 15,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "Practical Subjects:3Total Marks Obt.:645\nResult Status:PASSSGPA:8.29\nDate of Declaration:18/09/25\nCodeNameTypeInternalExternalBack PaperGrade\nBCS601Software EngineeringTheory2950--B+\nBCS602Compiler DesignTheory2646--B+\nBCS603Computer NetworksTheory2744--B+\nBCS061Big DataTheory2744--B+\nBOE068SOFTWARE PROJECT MANAGEMENTTheory2653--B+\nBCS651Software Engineering LabPractical4644--A+\nBCS652Compiler Design LabPractical4645--A+\nBCS653Computer Networks LabPractical4646--A+",
+            "score": 0.746933,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-11",
+              "chunkIndex": 11,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.742536545,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      },
+      {
+        "strategy": "sparse",
+        "answer": "Hi, how can I help you today?",
+        "latency": 327,
+        "evaluation": {
+          "faithfulness": 0,
+          "contextRecall": 0,
+          "answerRelevancy": 0.5
+        },
+        "retrievedChunks": [],
+        "chunkCount": 0,
+        "error": null
+      },
+      {
+        "strategy": "hybrid",
+        "answer": "It seems like you just said \"hi\". Is there something I can help you with or would you like to start a conversation?",
+        "latency": 1049,
+        "evaluation": {
+          "faithfulness": 0.1,
+          "contextRecall": 0.2,
+          "answerRelevancy": 0.6
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Date of Declaration:17/06/26\nCodeNameTypeInternalExternalBack PaperGrade\nBOE084ENTREPRENEURSHIP DEVELOPMENTTheory2737--B\nBOE096DIGITAL AND SOCIAL MEDIA MARKETINGTheory2940--B\nBCS851Project-IIPractical90325--A+\n \nMOOCs Certifications\nFirst Year Marks:1261Second Year Marks:1520\nThird Year Marks:1547Fourth Year Marks:1164\nFirst Year Result:PASSSecond Year Result:PASS\nThird Year Result:PASSFourth Year Result:PASS\nCGPA:7.8MAX CGPA:10\nDivision Awarded:I-DIV",
+            "score": 0.01639344262295082,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-15",
+              "chunkIndex": 15,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "Practical Subjects:3Total Marks Obt.:645\nResult Status:PASSSGPA:8.29\nDate of Declaration:18/09/25\nCodeNameTypeInternalExternalBack PaperGrade\nBCS601Software EngineeringTheory2950--B+\nBCS602Compiler DesignTheory2646--B+\nBCS603Computer NetworksTheory2744--B+\nBCS061Big DataTheory2744--B+\nBOE068SOFTWARE PROJECT MANAGEMENTTheory2653--B+\nBCS651Software Engineering LabPractical4644--A+\nBCS652Compiler Design LabPractical4645--A+\nBCS653Computer Networks LabPractical4646--A+",
+            "score": 0.016129032258064516,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-11",
+              "chunkIndex": 11,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.015873015873015872,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      }
+    ],
+    "summary": {
+      "avgLatency": 2778,
+      "bestStrategy": "hybrid",
+      "allSucceeded": true
+    },
+    "timestamp": 1784457754730
+  },
+  {
+    "question": "According to the provided context, Mahipal Singh's result is PASS, and his final CGPA is not explicitly mentioned. However, his SGPA for the 7th semester is 8.53. To calculate the CGPA, we would need to know the SGPA of all semesters, which is not provided in the given context. Therefore, the final CGPA cannot be determined with the provided information.According to the provided context, Mahipal Singh's result is PASS, and his final CGPA is not explicitly mentioned. However, his SGPA for the 7th semester is 8.53. To calculate the CGPA, we would need to know the SGPA of all semesters, which is not provided in the given context. Therefore, the final CGPA cannot be determined with the provided information.",
+    "results": [
+      {
+        "strategy": "dense",
+        "answer": "Mahipal Singh's final CGPA is 7.8. The provided context does indeed mention his CGPA, which is 7.8, with a Division Awarded as I-DIV. The statement about the CGPA not being explicitly mentioned was incorrect, as it is mentioned in the given context.",
+        "latency": 10091,
+        "evaluation": {
+          "faithfulness": 0.17647058823529413,
+          "contextRecall": 0.35294117647058826,
+          "answerRelevancy": 0.3907563025210084
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Session : 2025-26(REGULAR) Semesters : 7,8 Result : PASS Marks : 1164/1400 COP : Division : I-\nDIV\nSemester:7Even/Odd:Odd\nTotal Subjects:7Theory Subjects:3\nPractical Subjects:4Total Marks Obt.:616\nResult Status:CP( 0)SGPA:8.53\nDate of Declaration:15/02/26\nCodeNameTypeInternalExternalBack PaperGrade\nBCS701Artificial IntelligenceTheory2342--B\nBCS071Cloud ComputingTheory2654--A\nBOE074RENEWABLE ENERGY RESOURCESTheory2741--B\nBCS751Artificial Intelligence LABPractical4747--A+",
+            "score": 0.83252573,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-13",
+              "chunkIndex": 13,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "Cleared\nSemester:1Even/Odd:Odd\nTotal Subjects:9Theory Subjects:5\nPractical Subjects:4Total Marks Obt.:630\nResult Status:CP( 0)SGPA:7.09\nDate of Declaration:24/07/23\nCodeNameTypeInternalExternalBack PaperGrade\nBAS101Engineering PhysicsTheory1943--B\nBAS103Engineering Mathematics-ITheory2126--D\nBEE101Fundamentals of Electrical EngineeringTheory2053--B+\nBCS101Programming for Problem SolvingTheory2235--C\nBAS105Soft SkillsTheory2055--B+\nBAS151Engineering Physics LabPractical3944--A",
+            "score": 0.822248816,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-1",
+              "chunkIndex": 1,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "Third Year Result:PASSFourth Year Result:PASS\nCGPA:7.8MAX CGPA:10\nDivision Awarded:I-DIV\nNote: University doesn't own for the errors or omissions, if any, in this statement.\nDesigned & Developed by AKTU-SDC Team\n16/07/2026, 14:13One View by AKTU SDC Team\nabout:blank4/4",
+            "score": 0.819342613,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-16",
+              "chunkIndex": 16,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      },
+      {
+        "strategy": "sparse",
+        "answer": "Mahipal Singh's final CGPA is 7.8.",
+        "latency": 165,
+        "evaluation": {
+          "faithfulness": 0.375,
+          "contextRecall": 0.75,
+          "answerRelevancy": 0.4583333333333333
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "AKTU-One-View\nStudent Result\nInstitute Code\n& Name\n:(230 ) DRONACHARYA GROUP OF INSTITUTIONS,GAUTAM BUDDH NAGAR\nCourse Code &\nName\n:(04) B.TECH\nBranch Code &\nName\n:\n(10) COMPUTER SCIENCE\nAND ENGINEERING\nRollNo:2202300100098EnrollmentNo:220230010047902\nName:MAHIPAL SINGHHindi Name:Mahipal singh\nFather's Name:JAGDISH SINGHGender:M\nPrint One\nView\nOne View Result\nSession : 2022-23(REGULAR) Semesters : 1,2 Result : PASS Marks : 1261/1800 COP : Audit 1 :\nCleared\nSemester:1Even/Odd:Odd",
+            "score": 10.976585630469437,
+            "retrievalMethod": "sparse",
+            "metadata": {
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z",
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-0",
+              "chunkIndex": 0
+            }
+          },
+          {
+            "pageContent": "Third Year Result:PASSFourth Year Result:PASS\nCGPA:7.8MAX CGPA:10\nDivision Awarded:I-DIV\nNote: University doesn't own for the errors or omissions, if any, in this statement.\nDesigned & Developed by AKTU-SDC Team\n16/07/2026, 14:13One View by AKTU SDC Team\nabout:blank4/4",
+            "score": 10.963223750009831,
+            "retrievalMethod": "sparse",
+            "metadata": {
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z",
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-16",
+              "chunkIndex": 16
+            }
+          },
+          {
+            "pageContent": "Session : 2025-26(REGULAR) Semesters : 7,8 Result : PASS Marks : 1164/1400 COP : Division : I-\nDIV\nSemester:7Even/Odd:Odd\nTotal Subjects:7Theory Subjects:3\nPractical Subjects:4Total Marks Obt.:616\nResult Status:CP( 0)SGPA:8.53\nDate of Declaration:15/02/26\nCodeNameTypeInternalExternalBack PaperGrade\nBCS701Artificial IntelligenceTheory2342--B\nBCS071Cloud ComputingTheory2654--A\nBOE074RENEWABLE ENERGY RESOURCESTheory2741--B\nBCS751Artificial Intelligence LABPractical4747--A+",
+            "score": 8.353843547465988,
+            "retrievalMethod": "sparse",
+            "metadata": {
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z",
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-13",
+              "chunkIndex": 13
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      },
+      {
+        "strategy": "hybrid",
+        "answer": "The final CGPA of Mahipal Singh is 7.8. \n\nThis information can be found in the provided context where it is explicitly stated as \"CGPA:7.8\". The statement that the CGPA cannot be determined is incorrect as the CGPA is clearly mentioned.",
+        "latency": 1940,
+        "evaluation": {
+          "faithfulness": 0.10344827586206896,
+          "contextRecall": 0.3448275862068966,
+          "answerRelevancy": 0.37479474548440067
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Session : 2025-26(REGULAR) Semesters : 7,8 Result : PASS Marks : 1164/1400 COP : Division : I-\nDIV\nSemester:7Even/Odd:Odd\nTotal Subjects:7Theory Subjects:3\nPractical Subjects:4Total Marks Obt.:616\nResult Status:CP( 0)SGPA:8.53\nDate of Declaration:15/02/26\nCodeNameTypeInternalExternalBack PaperGrade\nBCS701Artificial IntelligenceTheory2342--B\nBCS071Cloud ComputingTheory2654--A\nBOE074RENEWABLE ENERGY RESOURCESTheory2741--B\nBCS751Artificial Intelligence LABPractical4747--A+",
+            "score": 0.032266458495966696,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-13",
+              "chunkIndex": 13,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "Third Year Result:PASSFourth Year Result:PASS\nCGPA:7.8MAX CGPA:10\nDivision Awarded:I-DIV\nNote: University doesn't own for the errors or omissions, if any, in this statement.\nDesigned & Developed by AKTU-SDC Team\n16/07/2026, 14:13One View by AKTU SDC Team\nabout:blank4/4",
+            "score": 0.03200204813108039,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-16",
+              "chunkIndex": 16,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "AKTU-One-View\nStudent Result\nInstitute Code\n& Name\n:(230 ) DRONACHARYA GROUP OF INSTITUTIONS,GAUTAM BUDDH NAGAR\nCourse Code &\nName\n:(04) B.TECH\nBranch Code &\nName\n:\n(10) COMPUTER SCIENCE\nAND ENGINEERING\nRollNo:2202300100098EnrollmentNo:220230010047902\nName:MAHIPAL SINGHHindi Name:Mahipal singh\nFather's Name:JAGDISH SINGHGender:M\nPrint One\nView\nOne View Result\nSession : 2022-23(REGULAR) Semesters : 1,2 Result : PASS Marks : 1261/1800 COP : Audit 1 :\nCleared\nSemester:1Even/Odd:Odd",
+            "score": 0.01639344262295082,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z",
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-0",
+              "chunkIndex": 0
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      }
+    ],
+    "summary": {
+      "avgLatency": 4065.3333333333335,
+      "bestStrategy": "hybrid",
+      "allSucceeded": true
+    },
+    "timestamp": 1784470387022
+  },
+  {
+    "question": "what is my name",
+    "results": [
+      {
+        "strategy": "dense",
+        "answer": "I don't know. The provided context does not contain any information about your name. It appears to be a collection of academic records, course details, and technical information related to REST API security, but it does not include personal identification details such as your name.",
+        "latency": 13226,
+        "evaluation": {
+          "faithfulness": 0.10526315789473684,
+          "contextRecall": 0.2631578947368421,
+          "answerRelevancy": 0.256578947368421
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Date of Declaration:17/06/26\nCodeNameTypeInternalExternalBack PaperGrade\nBOE084ENTREPRENEURSHIP DEVELOPMENTTheory2737--B\nBOE096DIGITAL AND SOCIAL MEDIA MARKETINGTheory2940--B\nBCS851Project-IIPractical90325--A+\n \nMOOCs Certifications\nFirst Year Marks:1261Second Year Marks:1520\nThird Year Marks:1547Fourth Year Marks:1164\nFirst Year Result:PASSSecond Year Result:PASS\nThird Year Result:PASSFourth Year Result:PASS\nCGPA:7.8MAX CGPA:10\nDivision Awarded:I-DIV",
+            "score": 0.75230509,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-15",
+              "chunkIndex": 15,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "BCS303Discrete Structures & Theory of LogicTheory2752--B+\nBCC301Cyber SecurityTheory2652--B+\nBCS351Data Structure LabPractical4643--A\nBCS352Computer Organization and Architecture LabPractical4243--A\nBCS353Web Designing WorkshopPractical4241--A\nBCC351Internship Assessment /Mini ProjectPractical90----A+\n \n16/07/2026, 14:13One View by AKTU SDC Team\nabout:blank2/4",
+            "score": 0.746722281,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-6",
+              "chunkIndex": 6,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "400 Bad Request – Client error (invalid request) \n401 Unauthorized – Authentication required \n403 Forbidden – Client does not have access \n404 Not Found – Resource does not exist \n500 Internal Server Error – Generic server error \n7. How do you secure a REST API?\nAuthentication:   Use OAuth 2.0, JWT, or API keys \nAuthorization:    Implement role-based access control (RBAC) \nCORS (Cross-Origin Resource Sharing):     Restrict API access to trusted origins",
+            "score": 0.746673644,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "rest api.pdf-7",
+              "chunkIndex": 7,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      },
+      {
+        "strategy": "sparse",
+        "answer": "Your name is Mahipal Singh.",
+        "latency": 427,
+        "evaluation": {
+          "faithfulness": 0.6,
+          "contextRecall": 0.6,
+          "answerRelevancy": 0.55
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "AKTU-One-View\nStudent Result\nInstitute Code\n& Name\n:(230 ) DRONACHARYA GROUP OF INSTITUTIONS,GAUTAM BUDDH NAGAR\nCourse Code &\nName\n:(04) B.TECH\nBranch Code &\nName\n:\n(10) COMPUTER SCIENCE\nAND ENGINEERING\nRollNo:2202300100098EnrollmentNo:220230010047902\nName:MAHIPAL SINGHHindi Name:Mahipal singh\nFather's Name:JAGDISH SINGHGender:M\nPrint One\nView\nOne View Result\nSession : 2022-23(REGULAR) Semesters : 1,2 Result : PASS Marks : 1261/1800 COP : Audit 1 :\nCleared\nSemester:1Even/Odd:Odd",
+            "score": 4.718780530607647,
+            "retrievalMethod": "sparse",
+            "metadata": {
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z",
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-0",
+              "chunkIndex": 0
+            }
+          }
+        ],
+        "chunkCount": 1,
+        "error": null
+      },
+      {
+        "strategy": "hybrid",
+        "answer": "Your name is Mahipal Singh.",
+        "latency": 849,
+        "evaluation": {
+          "faithfulness": 0,
+          "contextRecall": 0.6,
+          "answerRelevancy": 0.55
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Date of Declaration:17/06/26\nCodeNameTypeInternalExternalBack PaperGrade\nBOE084ENTREPRENEURSHIP DEVELOPMENTTheory2737--B\nBOE096DIGITAL AND SOCIAL MEDIA MARKETINGTheory2940--B\nBCS851Project-IIPractical90325--A+\n \nMOOCs Certifications\nFirst Year Marks:1261Second Year Marks:1520\nThird Year Marks:1547Fourth Year Marks:1164\nFirst Year Result:PASSSecond Year Result:PASS\nThird Year Result:PASSFourth Year Result:PASS\nCGPA:7.8MAX CGPA:10\nDivision Awarded:I-DIV",
+            "score": 0.01639344262295082,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-15",
+              "chunkIndex": 15,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          },
+          {
+            "pageContent": "AKTU-One-View\nStudent Result\nInstitute Code\n& Name\n:(230 ) DRONACHARYA GROUP OF INSTITUTIONS,GAUTAM BUDDH NAGAR\nCourse Code &\nName\n:(04) B.TECH\nBranch Code &\nName\n:\n(10) COMPUTER SCIENCE\nAND ENGINEERING\nRollNo:2202300100098EnrollmentNo:220230010047902\nName:MAHIPAL SINGHHindi Name:Mahipal singh\nFather's Name:JAGDISH SINGHGender:M\nPrint One\nView\nOne View Result\nSession : 2022-23(REGULAR) Semesters : 1,2 Result : PASS Marks : 1261/1800 COP : Audit 1 :\nCleared\nSemester:1Even/Odd:Odd",
+            "score": 0.01639344262295082,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z",
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-0",
+              "chunkIndex": 0
+            }
+          },
+          {
+            "pageContent": "BCS303Discrete Structures & Theory of LogicTheory2752--B+\nBCC301Cyber SecurityTheory2652--B+\nBCS351Data Structure LabPractical4643--A\nBCS352Computer Organization and Architecture LabPractical4243--A\nBCS353Web Designing WorkshopPractical4241--A\nBCC351Internship Assessment /Mini ProjectPractical90----A+\n \n16/07/2026, 14:13One View by AKTU SDC Team\nabout:blank2/4",
+            "score": 0.016129032258064516,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "RESULT AKTU BTECH 2026.pdf-6",
+              "chunkIndex": 6,
+              "source": "RESULT AKTU BTECH 2026.pdf",
+              "uploadedAt": "2026-07-19T04:56:16.973Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      }
+    ],
+    "summary": {
+      "avgLatency": 4834,
+      "bestStrategy": "hybrid",
+      "allSucceeded": true
+    },
+    "timestamp": 1784471459438
+  }
+]

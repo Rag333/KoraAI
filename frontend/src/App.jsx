@@ -1,7 +1,36 @@
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { 
+  Upload, 
+  Send, 
+  Layers, 
+  BarChart2, 
+  Mail, 
+  FileText, 
+  Sparkles, 
+  Database,
+  Info,
+  Copy,
+  Check,
+  Trash2,
+  User,
+  Cpu
+} from "lucide-react";
 import Dashboard from "./Dashboard.jsx";
+import ThreeScene from "./ThreeScene.jsx";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
+
+async function parseJsonResponse(response) {
+  const bodyText = await response.text();
+  try {
+    return JSON.parse(bodyText);
+  } catch (err) {
+    throw new Error(
+      `Expected JSON response but received HTML or invalid JSON:\n${bodyText.slice(0, 400)}`,
+    );
+  }
+}
 
 export default function App() {
   const messageListRef = useRef(null);
@@ -13,7 +42,35 @@ export default function App() {
   const [lastEvaluation, setLastEvaluation] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isChatting, setIsChatting] = useState(false);
-  const [activeTab, setActiveTab] = useState("chat");
+  const [copiedIndex, setCopiedIndex] = useState(null);
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleCopyText = (text, idx) => {
+    navigator.clipboard.writeText(text);
+    setCopiedIndex(idx);
+    setTimeout(() => {
+      setCopiedIndex(null);
+    }, 2000);
+  };
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window === "undefined") return "chat";
+    const hash = window.location.hash.replace("#", "");
+    if (hash === "/dashboard" || hash === "dashboard") return "dashboard";
+    if (window.location.pathname.endsWith("/dashboard")) return "dashboard";
+    return "chat";
+  });
+
+  useEffect(() => {
+    function syncFromHash() {
+      const h = window.location.hash.replace("#", "");
+      if (h === "/dashboard" || h === "dashboard") setActiveTab("dashboard");
+      else setActiveTab("chat");
+    }
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
 
   useEffect(() => {
     const messageList = messageListRef.current;
@@ -25,7 +82,26 @@ export default function App() {
       top: messageList.scrollHeight,
       behavior: "smooth",
     });
+
+    if (messageList.lastElementChild) {
+      gsap.fromTo(
+        messageList.lastElementChild,
+        { opacity: 0, y: 30, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.15)" }
+      );
+    }
   }, [messages]);
+
+  useEffect(() => {
+    gsap.from([".hero-headline > div", ".hero-feature", ".nav-tab"], {
+      opacity: 0,
+      y: 24,
+      duration: 0.85,
+      ease: "power3.out",
+      stagger: 0.12,
+      delay: 0.2,
+    });
+  }, []);
 
   async function handleUpload(event) {
     event.preventDefault();
@@ -47,7 +123,7 @@ export default function App() {
         body: formData,
       });
 
-      const data = await response.json();
+      const data = await parseJsonResponse(response);
       if (!response.ok) {
         throw new Error(data.error || "Upload failed.");
       }
@@ -62,14 +138,7 @@ export default function App() {
     }
   }
 
-  async function handleAsk(event) {
-    event.preventDefault();
-    const trimmedQuestion = question.trim();
-
-    if (!trimmedQuestion) {
-      return;
-    }
-
+  async function executeAsk(trimmedQuestion) {
     const nextMessages = [
       ...messages,
       { role: "user", content: trimmedQuestion },
@@ -87,7 +156,7 @@ export default function App() {
         body: JSON.stringify({ question: trimmedQuestion, strategy }),
       });
 
-      const data = await response.json();
+      const data = await parseJsonResponse(response);
       if (!response.ok) {
         throw new Error(data.error || "Chat request failed.");
       }
@@ -120,102 +189,283 @@ export default function App() {
     }
   }
 
+  async function handleAsk(event) {
+    event.preventDefault();
+    const trimmedQuestion = question.trim();
+
+    if (!trimmedQuestion) {
+      return;
+    }
+
+    if (showIntro) {
+      gsap.to(".empty-state", {
+        opacity: 0,
+        y: -30,
+        scale: 0.95,
+        duration: 0.35,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setShowIntro(false);
+          executeAsk(trimmedQuestion);
+        }
+      });
+    } else {
+      executeAsk(trimmedQuestion);
+    }
+  }
+
+  function handleSuggestionClick(prompt) {
+    if (showIntro) {
+      gsap.to(".empty-state", {
+        opacity: 0,
+        y: -30,
+        scale: 0.95,
+        duration: 0.35,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setShowIntro(false);
+          executeAsk(prompt);
+        }
+      });
+    }
+  }
+
   return (
     <main className="app-shell">
       <section className="hero-card">
-        <p className="eyebrow">RAG Dashboard</p>
-        <h1>Upload a PDF and chat with your company knowledge base.</h1>
-        <p className="hero-copy">
-          This UI supports multiple retrieval strategies with inline citations
-          and an evaluation dashboard for strategy comparison.
-        </p>
+        <div className="hero-visual">
+          <ThreeScene />
+        </div>
+        <div className="hero-headline" style={{ maxWidth: "680px" }}>
+          <div>
+            <p className="eyebrow">RAG Dashboard</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "12px", marginBottom: "20px" }}>
+              <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.78rem", fontWeight: "700", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                <Layers size={13} /> Active Retrieval Strategy
+              </span>
+              <div className="strategy-cards-grid">
+                <button 
+                  type="button"
+                  className={`strategy-card-select ${strategy === "dense" ? "active" : ""}`}
+                  onClick={() => setStrategy("dense")}
+                >
+                  <div className="strategy-card-icon dense">
+                    <Sparkles size={14} />
+                  </div>
+                  <div className="strategy-card-content">
+                    <span className="title">Dense Retrieval</span>
+                    <span className="desc">Semantic matching via Pinecone</span>
+                  </div>
+                </button>
+                
+                <button 
+                  type="button"
+                  className={`strategy-card-select ${strategy === "sparse" ? "active" : ""}`}
+                  onClick={() => setStrategy("sparse")}
+                >
+                  <div className="strategy-card-icon sparse">
+                    <Layers size={14} />
+                  </div>
+                  <div className="strategy-card-content">
+                    <span className="title">Sparse BM25</span>
+                    <span className="desc">Keyword match for exact words</span>
+                  </div>
+                </button>
+                
+                <button 
+                  type="button"
+                  className={`strategy-card-select ${strategy === "hybrid" ? "active" : ""}`}
+                  onClick={() => setStrategy("hybrid")}
+                >
+                  <div className="strategy-card-icon hybrid">
+                    <Database size={14} />
+                  </div>
+                  <div className="strategy-card-content">
+                    <span className="title">Hybrid RRF</span>
+                    <span className="desc">Combined rank fusion model</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "16px" }}>
+              <span className="feature-pill">
+                <Sparkles size={13} style={{ marginRight: 4 }} /> Transparent citations
+              </span>
+              <span className="feature-pill">
+                <Mail size={13} style={{ marginRight: 4 }} /> Email reports
+              </span>
+            </div>
+            
+            <p style={{ marginTop: "16px", color: "var(--muted)", maxWidth: "58ch", lineHeight: "1.7", fontSize: "0.95rem", marginBottom: "20px" }}>
+              Evaluate, visualize, and compare Dense, Sparse (BM25), and Hybrid retrieval models in real-time.
+            </p>
+
+            <div className="system-monitor-grid">
+              <div className="status-item">
+                <span className="label">Vector Index</span>
+                <span className="value">
+                  <span className="pulse-dot"></span> Pinecone
+                </span>
+              </div>
+              <div className="status-item">
+                <span className="label">Generator LLM</span>
+                <span className="value">Llama 3.3 70B</span>
+              </div>
+              <div className="status-item">
+                <span className="label">Embeddings</span>
+                <span className="value">HF (384-dim)</span>
+              </div>
+              <div className="status-item">
+                <span className="label">Cluster Status</span>
+                <span className="value" style={{ color: "#10b981" }}>Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <nav className="nav-tabs">
         <button
           className={`nav-tab ${activeTab === "chat" ? "active" : ""}`}
-          onClick={() => setActiveTab("chat")}
+          onClick={() => {
+            window.location.hash = "#/";
+            setActiveTab("chat");
+          }}
         >
-          Chat
+          Chat Shell
         </button>
         <button
           className={`nav-tab ${activeTab === "dashboard" ? "active" : ""}`}
-          onClick={() => setActiveTab("dashboard")}
+          onClick={() => {
+            window.location.hash = "#/dashboard";
+            setActiveTab("dashboard");
+          }}
         >
-          Strategy Dashboard
+          Strategy Comparison
         </button>
       </nav>
 
       {activeTab === "dashboard" ? (
-        <Dashboard />
+        <Dashboard onBackToChat={() => {
+          window.location.hash = "#/";
+          setActiveTab("chat");
+        }} />
       ) : (
         <section className="panel-grid">
           <form className="panel" onSubmit={handleUpload}>
-            <h2>1. Upload PDF</h2>
+            <h2 style={{ fontSize: "1.35rem", display: "flex", alignItems: "center", gap: "8px" }}>
+              <Upload size={18} /> 1. Upload PDF
+            </h2>
             <label className="upload-box">
-              <span>Select a PDF file</span>
+              <Upload size={32} style={{ margin: "0 auto 8px", color: "var(--accent)" }} />
+              <span style={{ fontWeight: "600", fontSize: "0.92rem", color: "var(--text)" }}>
+                {selectedFile ? selectedFile.name : "Select a PDF document"}
+              </span>
+              <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>PDF files up to 10MB</span>
               <input
                 type="file"
                 accept="application/pdf"
+                style={{ display: "none" }}
                 onChange={(event) =>
                   setSelectedFile(event.target.files?.[0] ?? null)
                 }
               />
             </label>
-            <button type="submit" disabled={isUploading}>
-              {isUploading ? "Indexing..." : "Upload and Index"}
+            <button type="submit" disabled={isUploading} style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              {isUploading ? "Indexing Document..." : "Upload and Index"}
             </button>
-            <p className="status-text">
-              {uploadStatus ||
-                "Your indexed chunks will be stored in Pinecone."}
+            <p className="status-text" style={{ fontSize: "0.82rem", marginTop: "12px", textAlign: "center" }}>
+              {uploadStatus || "Ingested chunks are embedded and indexed in Pinecone."}
             </p>
           </form>
 
           <section className="panel chat-panel">
             <div className="chat-header">
               <div>
-                <h2>2. Ask Questions</h2>
-                <p>
-                  Chat responses use runtime-selected retrieval and return
-                  citations plus evaluation metrics.
+                <h2 style={{ fontSize: "1.35rem", display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Database size={18} /> 2. Ask RAG Bot
+                </h2>
+                <p style={{ fontSize: "0.88rem", margin: "4px 0 0" }}>
+                  Answers include interactive chunk references and performance scores.
                 </p>
               </div>
-              <div className="strategy-picker">
-                <label>
-                  Retrieval strategy
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  flexWrap: "wrap",
+                }}
+              >
+                {messages.length > 0 && (
+                  <button
+                    type="button"
+                    className="clean-chat-btn"
+                    onClick={() => {
+                      setMessages([]);
+                      setLastEvaluation(null);
+                      setShowIntro(true);
+                    }}
+                    style={{ display: "flex", alignItems: "center", gap: "6px" }}
+                  >
+                    <Trash2 size={13} /> Clear Chat
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className="email-button"
+                  onClick={() => {
+                    window.location.hash = "#/dashboard";
+                    setActiveTab("dashboard");
+                  }}
+                  style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "0.85rem", padding: "10px 16px" }}
+                >
+                  <BarChart2 size={14} /> Compare models
+                </button>
+                <div className="strategy-picker" style={{ minWidth: "140px" }}>
                   <select
                     value={strategy}
                     onChange={(event) => setStrategy(event.target.value)}
+                    style={{ margin: 0, padding: "8px 12px", fontSize: "0.85rem" }}
                   >
                     <option value="dense">Dense</option>
-                    <option value="sparse">Sparse</option>
+                    <option value="sparse">Sparse (BM25)</option>
                     <option value="hybrid">Hybrid</option>
                   </select>
-                </label>
+                </div>
               </div>
             </div>
             {lastEvaluation ? (
               <div className="evaluation-summary">
-                <span>Strategy: {lastEvaluation.strategy}</span>
-                <span>
-                  Faithfulness: {(lastEvaluation.faithfulness * 100).toFixed(0)}
-                  %
+                <span style={{ gridColumn: "span 2", fontWeight: "700", borderBottom: "1px solid rgba(99,102,241,0.08)", paddingBottom: "6px" }}>
+                  <Info size={14} /> Strategy: {lastEvaluation.strategy.toUpperCase()}
                 </span>
                 <span>
-                  Context recall:{" "}
-                  {(lastEvaluation.contextRecall * 100).toFixed(0)}%
+                  Faithfulness: <strong>{(lastEvaluation.faithfulness * 100).toFixed(0)}%</strong>
                 </span>
                 <span>
-                  Answer relevancy:{" "}
-                  {(lastEvaluation.answerRelevancy * 100).toFixed(0)}%
+                  Context recall: <strong>{(lastEvaluation.contextRecall * 100).toFixed(0)}%</strong>
+                </span>
+                <span style={{ gridColumn: "span 2", marginTop: "4px" }}>
+                  Answer relevancy: <strong>{(lastEvaluation.answerRelevancy * 100).toFixed(0)}%</strong>
                 </span>
               </div>
             ) : null}
 
             <div ref={messageListRef} className="message-list">
-              {messages.length === 0 ? (
-                <div className="empty-state">
-                  Ask a question after uploading at least one PDF.
+              {showIntro ? (
+                <div className="empty-state" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "260px", gap: "12px", padding: "32px 16px" }}>
+                  <h3 style={{ margin: "4px 0 0", fontWeight: "800", fontSize: "1.4rem", fontFamily: "Plus Jakarta Sans", color: "var(--text)" }}>Luna RAG Assistant</h3>
+                  
+                  {/* Siri/Gemini voice wave visualizer animation */}
+                  <div className="ai-visualizer">
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
+                  </div>
                 </div>
               ) : (
                 messages.map((message, index) => (
@@ -223,29 +473,45 @@ export default function App() {
                     key={`${message.role}-${index}`}
                     className={`message message-${message.role}`}
                   >
-                    <p className="message-role">
-                      {message.role === "user" ? "You" : "Assistant"}
-                    </p>
-                    <p>{message.content}</p>
+                    <div className="message-header">
+                      <p className="message-role" style={{ display: "flex", alignItems: "center", gap: "8px", margin: 0, color: message.role === "user" ? "#b45309" : "var(--accent)" }}>
+                        <span className={`chat-avatar ${message.role}`}>
+                          {message.role === "user" ? <User size={12} /> : <Cpu size={12} />}
+                        </span>
+                        {message.role === "user" ? "User Query" : "RAG Synthesis"}
+                      </p>
+                      {message.role === "assistant" && (
+                        <button
+                          className={`copy-btn ${copiedIndex === index ? "copied" : ""}`}
+                          onClick={() => handleCopyText(message.content, index)}
+                          title="Copy response"
+                        >
+                          {copiedIndex === index ? <Check size={13} style={{ color: "#10b981" }} /> : <Copy size={13} />}
+                        </button>
+                      )}
+                    </div>
+                    <p style={{ whiteSpace: "pre-line", marginTop: "8px" }}>{message.content}</p>
                     {message.role === "assistant" &&
                     message.sources?.length > 0 ? (
                       <div className="source-block">
-                        <p className="source-text">Retrieved chunks:</p>
+                        <p className="source-text" style={{ fontWeight: "700", fontSize: "0.82rem", margin: "0 0 8px", display: "flex", alignItems: "center", gap: "6px" }}>
+                          <FileText size={13} /> Retrieved document chunks:
+                        </p>
                         {message.sources.map((source, index) => (
                           <details
                             key={`${source.metadata?.chunkId ?? index}-${index}`}
                             className="source-entry"
                           >
-                            <summary>
-                              {source.metadata?.source || "Indexed document"} •{" "}
-                              {source.retrievalMethod || "dense"} • score{" "}
-                              {typeof source.score === "number"
-                                ? source.score.toFixed(2)
-                                : "n/a"}
+                            <summary style={{ listStyleType: "none", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }}>
+                              <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "70%" }}>
+                                {source.metadata?.source || "Indexed document"}
+                              </span>
+                              <span className="feature-pill" style={{ padding: "2px 8px", fontSize: "0.7rem", textTransform: "uppercase" }}>
+                                {source.retrievalMethod || "dense"} ({(typeof source.score === "number" ? source.score.toFixed(2) : "n/a")})
+                              </span>
                             </summary>
-                            <p className="source-snippet">
-                              {source.pageContent?.slice(0, 280) ?? ""}
-                              {source.pageContent?.length > 280 ? "..." : ""}
+                            <p className="source-snippet" style={{ borderLeft: "2px solid var(--accent)", paddingLeft: "8px", marginTop: "8px" }}>
+                              {source.pageContent}
                             </p>
                           </details>
                         ))}
@@ -260,11 +526,18 @@ export default function App() {
               <textarea
                 rows="4"
                 value={question}
-                placeholder="What does the internal policy say about leave approval?"
+                placeholder="Ask a question about the document..."
                 onChange={(event) => setQuestion(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    handleAsk(event);
+                  }
+                }}
               />
-              <button type="submit" disabled={isChatting}>
-                {isChatting ? "Thinking..." : "Send"}
+              <button type="submit" disabled={isChatting} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                <Send size={16} />
+                {isChatting ? "Retrieving & Synthesizing..." : "Ask Bot"}
               </button>
             </form>
           </section>

@@ -3,6 +3,10 @@ import multer from "multer";
 import { answerQuestion } from "../services/chat-service.js";
 import { indexDocumentFromBuffer } from "../services/document-service.js";
 import { evaluateAllStrategies } from "../services/evaluation-service.js";
+import {
+  sendEvaluationEmail,
+  testEmailConnection,
+} from "../services/email-service.js";
 
 const router = express.Router();
 const upload = multer({
@@ -55,7 +59,7 @@ router.post("/chat", async (req, res) => {
   }
 });
 
-router.post("/evaluate", async (req, res) => {
+const performCompare = async (req, res) => {
   try {
     const question = req.body?.question?.trim();
 
@@ -64,6 +68,57 @@ router.post("/evaluate", async (req, res) => {
     }
 
     const result = await evaluateAllStrategies(question);
+    return res.json(result);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+router.post("/evaluate", performCompare);
+router.post("/compare", performCompare);
+
+router.get("/history", async (_req, res) => {
+  try {
+    const { readEvaluations } = await import("../services/store.js");
+    const data = readEvaluations();
+    return res.json({ results: data });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+router.post("/email-results", async (req, res) => {
+  try {
+    const { recipientEmail, question, results, summary } = req.body;
+
+    if (!recipientEmail) {
+      return res.status(400).json({ error: "Recipient email is required." });
+    }
+
+    if (!question || !results || !summary) {
+      return res
+        .status(400)
+        .json({ error: "Question, results, and summary are required." });
+    }
+
+    const result = await sendEvaluationEmail(
+      recipientEmail,
+      question,
+      results,
+      summary,
+    );
+    if (!result.success) {
+      return res.status(500).json({ error: result.error });
+    }
+    return res.json(result);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/email-test", async (_req, res) => {
+  try {
+    const result = await testEmailConnection();
     return res.json(result);
   } catch (error) {
     return res.status(500).json({ error: error.message });
