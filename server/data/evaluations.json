@@ -634,5 +634,123 @@
       "allSucceeded": true
     },
     "timestamp": 1784471459438
+  },
+  {
+    "question": "why are you here",
+    "results": [
+      {
+        "strategy": "dense",
+        "answer": "I don't know. The provided context appears to be related to a job opportunity or internship, but it does not explicitly state why I, as an assistant, am here. It seems to be a description of the benefits and requirements of a position, but it does not provide information about my purpose or role.",
+        "latency": 12792,
+        "evaluation": {
+          "faithfulness": 0.21951219512195122,
+          "contextRecall": 0.2682926829268293,
+          "answerRelevancy": 0.38414634146341464
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Why Join Us: \n• Get real exposure to AI projects – not just theory, but actual hands-on work. \n• Learn directly from experienced engineers working on global products. \n• Work on exciting areas like Electric Vehicles, Smart Agriculture, and Healthcare. \n• Possibility of full-time conversion based on performance. \n• Be part of a friendly, supportive team that values your growth. \nBENEFITS \n• Structured training and mentorship from Day 1.",
+            "score": 0.772257328,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "Gen_AI_Intern_JD .pdf-9",
+              "chunkIndex": 9,
+              "source": "Gen_AI_Intern_JD .pdf",
+              "uploadedAt": "2026-07-23T05:51:04.655Z"
+            }
+          },
+          {
+            "pageContent": "• Awareness of what Artificial Intelligence or Machine Learning is – no deep expertise needed. \n• Good communication skills and ability to work in a team. \n• Eagerness to learn new tools and technologies with a positive attitude. \n• Organised, responsible, and able to meet deadlines. \n• Genuine interest in technology, AI, or smart systems is a big plus. \nWhy Join Us: \n• Get real exposure to AI projects – not just theory, but actual hands-on work.",
+            "score": 0.766888618,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "Gen_AI_Intern_JD .pdf-8",
+              "chunkIndex": 8,
+              "source": "Gen_AI_Intern_JD .pdf",
+              "uploadedAt": "2026-07-23T05:51:04.655Z"
+            }
+          },
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.749664783,
+            "retrievalMethod": "dense",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      },
+      {
+        "strategy": "sparse",
+        "answer": "I am here to assist with question-answering tasks. I can provide information and answer questions to the best of my knowledge based on the context provided.",
+        "latency": 298,
+        "evaluation": {
+          "faithfulness": 0,
+          "contextRecall": 0,
+          "answerRelevancy": 0.125
+        },
+        "retrievedChunks": [],
+        "chunkCount": 0,
+        "error": null
+      },
+      {
+        "strategy": "hybrid",
+        "answer": "I am here to assist with question-answering tasks, and it appears that I am part of a team that works on AI projects, possibly as an intern or a new member of the team, given the context of the \"Why Join Us\" section. The context suggests that I am here to learn, gain hands-on experience, and work on exciting projects, with the possibility of full-time conversion based on performance.",
+        "latency": 1247,
+        "evaluation": {
+          "faithfulness": 0.4791666666666667,
+          "contextRecall": 0.5625,
+          "answerRelevancy": 0.53125
+        },
+        "retrievedChunks": [
+          {
+            "pageContent": "Why Join Us: \n• Get real exposure to AI projects – not just theory, but actual hands-on work. \n• Learn directly from experienced engineers working on global products. \n• Work on exciting areas like Electric Vehicles, Smart Agriculture, and Healthcare. \n• Possibility of full-time conversion based on performance. \n• Be part of a friendly, supportive team that values your growth. \nBENEFITS \n• Structured training and mentorship from Day 1.",
+            "score": 0.01639344262295082,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "Gen_AI_Intern_JD .pdf-9",
+              "chunkIndex": 9,
+              "source": "Gen_AI_Intern_JD .pdf",
+              "uploadedAt": "2026-07-23T05:51:04.655Z"
+            }
+          },
+          {
+            "pageContent": "• Awareness of what Artificial Intelligence or Machine Learning is – no deep expertise needed. \n• Good communication skills and ability to work in a team. \n• Eagerness to learn new tools and technologies with a positive attitude. \n• Organised, responsible, and able to meet deadlines. \n• Genuine interest in technology, AI, or smart systems is a big plus. \nWhy Join Us: \n• Get real exposure to AI projects – not just theory, but actual hands-on work.",
+            "score": 0.016129032258064516,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "Gen_AI_Intern_JD .pdf-8",
+              "chunkIndex": 8,
+              "source": "Gen_AI_Intern_JD .pdf",
+              "uploadedAt": "2026-07-23T05:51:04.655Z"
+            }
+          },
+          {
+            "pageContent": "components.  They  have  become  the  preferred  choice  for  building  web  services  and\nAPIs due to their simplicity, flexibility, and compatibility with modern web development\npractices.\nAjeet Yadav",
+            "score": 0.015873015873015872,
+            "retrievalMethod": "hybrid",
+            "metadata": {
+              "chunkId": "rest api.pdf-23",
+              "chunkIndex": 23,
+              "source": "rest api.pdf",
+              "uploadedAt": "2026-07-18T10:45:12.249Z"
+            }
+          }
+        ],
+        "chunkCount": 3,
+        "error": null
+      }
+    ],
+    "summary": {
+      "avgLatency": 4779,
+      "bestStrategy": "hybrid",
+      "allSucceeded": true
+    },
+    "timestamp": 1784878616078
   }
 ]
