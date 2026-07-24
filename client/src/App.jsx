@@ -20,7 +20,7 @@ import {
 import Dashboard from "./Dashboard.jsx";
 import ThreeScene from "./ThreeScene.jsx";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? "").replace(/\/+$/, "");
 
 async function parseJsonResponse(response) {
   const bodyText = await response.text();

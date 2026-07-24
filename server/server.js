@@ -16,6 +16,12 @@ const corsOrigin = process.env.FRONTEND_URL || "*";
 app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 
+// Normalize double slashes in incoming request URLs
+app.use((req, _res, next) => {
+  req.url = req.url.replace(/\/+/g, "/");
+  next();
+});
+
 // API Routes
 app.use("/api", apiRouter);
 
@@ -24,7 +30,16 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", service: "Kora AI Backend" });
 });
 
-// Serve frontend static files if present (for single-server deployments)
+// Root API route handler
+app.get("/", (_req, res) => {
+  res.json({
+    message: "Kora AI Backend API is running.",
+    health: "/health",
+    api: "/api"
+  });
+});
+
+// Serve frontend static files if present (for unified single-server deployments)
 const possibleDistPaths = [
   path.join(__dirname, "..", "client", "dist"),
   path.join(__dirname, "client", "dist")
@@ -33,7 +48,6 @@ const possibleDistPaths = [
 const clientDistPath = possibleDistPaths.find((p) => fs.existsSync(p));
 
 if (clientDistPath) {
-  // Redirect plain /dashboard path to the hash-based dashboard route
   app.get("/dashboard", (_req, res) => {
     return res.redirect("/#/dashboard");
   });
@@ -49,15 +63,18 @@ if (clientDistPath) {
     }
     return res.sendFile(path.join(clientDistPath, "index.html"));
   });
-} else {
-  app.get("/", (_req, res) => {
-    res.json({
-      message: "Kora AI Backend API is running.",
-      health: "/health",
-      api: "/api"
-    });
-  });
 }
+
+// API 404 JSON Handler
+app.use("/api/*", (req, res) => {
+  res.status(404).json({ error: `API route not found: ${req.originalUrl}` });
+});
+
+// Global JSON Error Handler
+app.use((err, _req, res, _next) => {
+  console.error("Server Error:", err);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
