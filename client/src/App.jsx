@@ -14,7 +14,8 @@ import {
   Check,
   Trash2,
   User,
-  Cpu
+  Cpu,
+  MessageSquare
 } from "lucide-react";
 import Dashboard from "./Dashboard.jsx";
 import ThreeScene from "./ThreeScene.jsx";
@@ -325,26 +326,34 @@ export default function App() {
         </div>
       </section>
 
-      <nav className="nav-tabs">
-        <button
-          className={`nav-tab ${activeTab === "chat" ? "active" : ""}`}
-          onClick={() => {
-            window.location.hash = "#/";
-            setActiveTab("chat");
-          }}
-        >
-          Chat Shell
-        </button>
-        <button
-          className={`nav-tab ${activeTab === "dashboard" ? "active" : ""}`}
-          onClick={() => {
-            window.location.hash = "#/dashboard";
-            setActiveTab("dashboard");
-          }}
-        >
-          Strategy Comparison
-        </button>
-      </nav>
+      <div className="nav-tabs-container">
+        <nav className="nav-tabs-segmented" role="tablist">
+          <button
+            role="tab"
+            aria-selected={activeTab === "chat"}
+            className={`nav-tab-btn ${activeTab === "chat" ? "active" : ""}`}
+            onClick={() => {
+              window.location.hash = "#/";
+              setActiveTab("chat");
+            }}
+          >
+            <MessageSquare size={16} className="nav-tab-icon" />
+            <span>Chat Shell</span>
+          </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === "dashboard"}
+            className={`nav-tab-btn ${activeTab === "dashboard" ? "active" : ""}`}
+            onClick={() => {
+              window.location.hash = "#/dashboard";
+              setActiveTab("dashboard");
+            }}
+          >
+            <BarChart2 size={16} className="nav-tab-icon" />
+            <span>Strategy Comparison</span>
+          </button>
+        </nav>
+      </div>
 
       {activeTab === "dashboard" ? (
         <Dashboard onBackToChat={() => {

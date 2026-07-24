@@ -451,37 +451,77 @@ select {
   }
 }
 
-.nav-tabs {
+/* Premium Segmented Navigation Tabs */
+.nav-tabs-container {
   display: flex;
-  gap: 12px;
-  margin: 24px auto;
+  justify-content: flex-start;
+  margin: 28px auto;
   width: min(1200px, calc(100% - 32px));
-  padding: 0;
+  position: relative;
+  z-index: 10;
 }
 
-.nav-tab {
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(243, 241, 235, 0.5);
+.nav-tabs-segmented {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 9999px;
+  box-shadow: 
+    0 10px 25px -5px rgba(26, 34, 48, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.02),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
   cursor: pointer;
-  font-weight: 700;
+  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
   color: var(--muted);
-  box-shadow: 0 2px 8px rgba(26, 34, 48, 0.02);
-  transition: all 0.25s ease;
+  line-height: 1.2;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  outline: none;
 }
 
-.nav-tab:hover {
+.nav-tab-btn .nav-tab-icon {
+  color: var(--muted);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.nav-tab-btn:hover {
   color: var(--text);
-  background: rgba(243, 241, 235, 0.85);
-  border-color: rgba(99, 102, 241, 0.15);
+  background: rgba(243, 241, 235, 0.6);
 }
 
-.nav-tab.active {
-  color: #fff;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
-  border-color: transparent;
+.nav-tab-btn:hover .nav-tab-icon {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.nav-tab-btn.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%) !important;
+  box-shadow: 
+    0 6px 20px -2px rgba(99, 102, 241, 0.35),
+    0 2px 6px rgba(79, 70, 229, 0.2) !important;
+  border-color: transparent !important;
+}
+
+.nav-tab-btn.active .nav-tab-icon {
+  color: #ffffff !important;
 }
 
 .dashboard-shell {
