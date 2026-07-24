@@ -1,88 +1,115 @@
-# Kora AI - Production RAG System
+# Kora AI - Production RAG System with Evaluation Framework
 
-This project keeps the original Groq plus Pinecone RAG flow and extends it with:
+Kora AI is a Retrieval-Augmented Generation (RAG) system with support for Dense, Sparse (BM25), and Hybrid (RRF) retrieval, evaluation metrics, and interactive visualizations.
 
-- HuggingFace embeddings
-- Express APIs for PDF upload and chat
-- React frontend for uploading PDFs and chatting with indexed content
+The codebase is split into **standalone frontend (`client`)** and **backend (`server`)** applications for independent deployment and development.
 
-## Environment Variables
+---
 
-Set these before running the app:
+## Project Structure
+
+```text
+Kora-AI/
+├── client/          # Frontend React + Vite application
+│   ├── src/         # React components, pages, visual styles
+│   ├── package.json # Frontend dependencies
+│   └── vercel.json  # Vercel deployment config
+│
+├── server/          # Backend Express API & RAG pipeline
+│   ├── routes/      # Express API routes (/api/upload, /api/chat, /api/evaluate)
+│   ├── services/    # Retrieval, chat, document ingestion & evaluation services
+│   ├── lib/         # Embeddings & Vector store setup
+│   ├── render.yaml  # Render backend deployment blueprint
+│   └── package.json # Backend dependencies
+│
+└── package.json     # Workspace root manager
+```
+
+---
+
+## Local Setup & Development
+
+### 1. Install Dependencies
+
+Install dependencies for both client and server:
 
 ```bash
+npm run install:all
+```
+
+Or install individually:
+
+```bash
+cd client && npm install
+cd ../server && npm install
+```
+
+### 2. Configure Environment Variables
+
+Create `server/.env`:
+
+```env
+PORT=3000
+FRONTEND_URL=http://localhost:5173
+
 GROQ_API_KEY=your_groq_api_key
 PINECONE_API_KEY=your_pinecone_api_key
-PINECONE_INDEX_NAME=your_pinecone_index
+PINECONE_INDEX_NAME=kora-ai
 HF_API_KEY=your_huggingface_api_key
 HF_EMBEDDING_MODEL=sentence-transformers/distiluse-base-multilingual-cased
-PORT=3000
 ```
 
-`HF_API_KEY` is optional for basic public inference, but recommended for better rate limits. The default model here is set to a 512-dimensional Sentence Transformers embedding model so it matches a 512-dimension Pinecone index.
+Create `client/.env` (optional for local dev proxy):
 
-## Install
+```env
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+### 3. Running Locally
+
+Start Backend API (runs on `http://localhost:3000`):
 
 ```bash
-npm install
+npm run dev:server
 ```
 
-Create or update `.env` in the project root:
+Start Frontend (runs on `http://localhost:5173`):
 
 ```bash
-GROQ_API_KEY=your_groq_api_key
-PINECONE_API_KEY=your_pinecone_api_key
-PINECONE_INDEX_NAME=your_pinecone_index
-HF_API_KEY=your_huggingface_api_key
-HF_EMBEDDING_MODEL=sentence-transformers/distiluse-base-multilingual-cased
-PORT=3000
+npm run dev:client
 ```
 
-## Original CLI Flows
+---
 
-Index the default PDF:
+## Deployment Instructions
 
-```bash
-npm run run
-```
+### Deploying Frontend (`client`)
+- **Platform**: Vercel / Netlify / Cloudflare Pages / Render Static Site
+- **Root Directory**: `client`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Environment Variables**:
+  - `VITE_API_BASE_URL`: URL of your deployed backend (e.g. `https://kora-backend.onrender.com`)
 
-Or:
+### Deploying Backend (`server`)
+- **Platform**: Render / Railway / Vercel Serverless / AWS
+- **Root Directory**: `server`
+- **Build Command**: `npm install`
+- **Start Command**: `npm start`
+- **Environment Variables**: Set `GROQ_API_KEY`, `PINECONE_API_KEY`, `PINECONE_INDEX_NAME`, `HF_API_KEY`, and `FRONTEND_URL` (set to your deployed frontend domain for CORS).
+
+---
+
+## CLI Tools (Terminal Chat & Document Indexing)
+
+To index a document via CLI:
 
 ```bash
 npm run index-doc
 ```
 
-Run terminal chat:
+To start terminal chat:
 
 ```bash
 npm run chat
-```
-
-## Web App
-
-Start the Express API:
-
-```bash
-npm start
-```
-
-Or:
-
-```bash
-npm run server
-```
-
-Start the React app in a second terminal:
-
-```bash
-npm run client
-```
-
-Then open `http://localhost:5173`.
-
-To serve the built React app from Express:
-
-```bash
-npm run build
-npm start
 ```

@@ -1,0 +1,27 @@
+{
+  "name": "kora-ai-client",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "gsap": "^3.12.2",
+    "lucide-react": "^1.25.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.159.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.5.4",
+    "daisyui": "^5.6.18",
+    "postcss": "^8.5.19",
+    "tailwindcss": "^4.3.3",
+    "vite": "^7.0.0"
+  }
+}
