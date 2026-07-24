@@ -11,9 +11,17 @@ const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Configure CORS
-const corsOrigin = process.env.FRONTEND_URL || "*";
-app.use(cors({ origin: corsOrigin }));
+// Configure CORS (Allow all origins and preflight requests)
+app.use(cors());
+app.options("*", cors());
+
+app.use((_req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  next();
+});
+
 app.use(express.json());
 
 // Normalize double slashes in incoming request URLs

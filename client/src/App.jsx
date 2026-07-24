@@ -28,7 +28,6 @@ async function parseJsonResponse(response) {
     return JSON.parse(bodyText);
   } catch (err) {
     if (bodyText.trim().startsWith("<!DOCTYPE") || bodyText.trim().startsWith("<html")) {
-      const targetUrl = API_BASE_URL || window.location.origin;
       throw new Error(
         `Backend API connection error: Received HTML from ${response.url}.\n\n` +
         `Cause: The frontend cannot reach the backend API server.\n` +
@@ -40,6 +39,16 @@ async function parseJsonResponse(response) {
       `Expected JSON response but received invalid data:\n${bodyText.slice(0, 300)}`
     );
   }
+}
+
+function formatErrorMessage(error) {
+  if (error?.message === "Failed to fetch" || error?.name === "TypeError") {
+    return (
+      `Network Connection Error: Failed to reach backend API.\n\n` +
+      `If hosted on Render free tier, the backend server spins down when idle and takes ~30 seconds to wake up. Please wait 30s and try again.`
+    );
+  }
+  return error.message;
 }
 
 export default function App() {
@@ -142,7 +151,7 @@ export default function App() {
         `${data.message} ${data.chunksIndexed} chunks added from ${data.metadata.source}.`,
       );
     } catch (error) {
-      setUploadStatus(error.message);
+      setUploadStatus(formatErrorMessage(error));
     } finally {
       setIsUploading(false);
     }
@@ -190,7 +199,7 @@ export default function App() {
         ...nextMessages,
         {
           role: "assistant",
-          content: error.message,
+          content: formatErrorMessage(error),
           sources: [],
         },
       ]);
