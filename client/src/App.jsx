@@ -391,11 +391,15 @@ export default function App() {
 
           <section className="panel chat-panel">
             <div className="chat-header">
-              <div className="chat-header-title">
-                <h2><Database size={17} /> Ask RAG Bot</h2>
-                <span className="chat-header-badge">Llama 3.3 70B</span>
+              <div>
+                <h2 style={{ fontSize: "1.2rem", margin: 0, display: "flex", alignItems: "center", gap: "8px" }}>
+                  <Database size={16} /> 2. Ask RAG Bot
+                </h2>
+                <p style={{ fontSize: "0.82rem", margin: "2px 0 0", color: "var(--muted)" }}>
+                  Answers include interactive chunk references and performance scores.
+                </p>
               </div>
-              <div className="chat-header-actions">
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                 {messages.length > 0 && (
                   <button
                     type="button"
@@ -405,25 +409,27 @@ export default function App() {
                       setLastEvaluation(null);
                       setShowIntro(true);
                     }}
-                    title="Clear Chat"
+                    style={{ fontSize: "0.78rem", padding: "6px 10px" }}
                   >
-                    <Trash2 size={13} /> Clear
+                    <Trash2 size={12} /> Clear
                   </button>
                 )}
                 <button
                   type="button"
-                  className="email-button compact-btn"
+                  className="email-button"
                   onClick={() => {
                     window.location.hash = "#/dashboard";
                     setActiveTab("dashboard");
                   }}
+                  style={{ fontSize: "0.78rem", padding: "6px 12px", display: "flex", alignItems: "center", gap: "5px" }}
                 >
-                  <BarChart2 size={13} /> Compare
+                  <BarChart2 size={13} /> Compare models
                 </button>
                 <div className="strategy-picker">
                   <select
                     value={strategy}
                     onChange={(event) => setStrategy(event.target.value)}
+                    style={{ padding: "6px 10px", fontSize: "0.78rem" }}
                   >
                     <option value="dense">Dense</option>
                     <option value="sparse">Sparse (BM25)</option>
@@ -434,17 +440,17 @@ export default function App() {
             </div>
 
             {lastEvaluation ? (
-              <div className="evaluation-summary">
-                <span style={{ gridColumn: "span 2", fontWeight: "700", borderBottom: "1px solid rgba(99,102,241,0.08)", paddingBottom: "6px" }}>
-                  <Info size={14} /> Strategy: {lastEvaluation.strategy.toUpperCase()}
+              <div className="evaluation-summary" style={{ margin: "4px 0", padding: "8px 12px" }}>
+                <span style={{ gridColumn: "span 2", fontWeight: "700", borderBottom: "1px solid rgba(99,102,241,0.08)", paddingBottom: "4px", fontSize: "0.8rem" }}>
+                  <Info size={13} /> Strategy: {lastEvaluation.strategy.toUpperCase()}
                 </span>
-                <span>
+                <span style={{ fontSize: "0.78rem" }}>
                   Faithfulness: <strong>{(lastEvaluation.faithfulness * 100).toFixed(0)}%</strong>
                 </span>
-                <span>
+                <span style={{ fontSize: "0.78rem" }}>
                   Context recall: <strong>{(lastEvaluation.contextRecall * 100).toFixed(0)}%</strong>
                 </span>
-                <span style={{ gridColumn: "span 2", marginTop: "4px" }}>
+                <span style={{ gridColumn: "span 2", marginTop: "2px", fontSize: "0.78rem" }}>
                   Answer relevancy: <strong>{(lastEvaluation.answerRelevancy * 100).toFixed(0)}%</strong>
                 </span>
               </div>
@@ -452,29 +458,16 @@ export default function App() {
 
             <div ref={messageListRef} className="message-list">
               {showIntro ? (
-                <div className="empty-state-compact">
-                  <div className="ai-visualizer-small">
-                    <Sparkles size={18} />
-                  </div>
-                  <div className="empty-state-text">
-                    <h3>Kora-AI RAG Assistant</h3>
-                    <p>Ask questions about your uploaded documents</p>
-                  </div>
-                  <div className="suggested-prompts">
-                    <button
-                      type="button"
-                      className="prompt-chip"
-                      onClick={() => setQuestion("What are the key points in the document?")}
-                    >
-                      "Key points in document?"
-                    </button>
-                    <button
-                      type="button"
-                      className="prompt-chip"
-                      onClick={() => setQuestion("Summarize the main topics and details")}
-                    >
-                      "Summarize main topics"
-                    </button>
+                <div className="empty-state-tight">
+                  <h3 style={{ margin: 0, fontWeight: "800", fontSize: "1.15rem", fontFamily: "Plus Jakarta Sans", color: "var(--text)" }}>Kora-AI RAG Assistant</h3>
+                  
+                  {/* Siri/Gemini voice wave visualizer animation */}
+                  <div className="ai-visualizer">
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
+                    <div className="visualizer-bar"></div>
                   </div>
                 </div>
               ) : (
@@ -484,9 +477,9 @@ export default function App() {
                     className={`message message-${message.role}`}
                   >
                     <div className="message-header">
-                      <p className="message-role" style={{ display: "flex", alignItems: "center", gap: "8px", margin: 0, color: message.role === "user" ? "#b45309" : "var(--accent)" }}>
+                      <p className="message-role" style={{ display: "flex", alignItems: "center", gap: "6px", margin: 0, color: message.role === "user" ? "#b45309" : "var(--accent)" }}>
                         <span className={`chat-avatar ${message.role}`}>
-                          {message.role === "user" ? <User size={12} /> : <Cpu size={12} />}
+                          {message.role === "user" ? <User size={11} /> : <Cpu size={11} />}
                         </span>
                         {message.role === "user" ? "User Query" : "RAG Synthesis"}
                       </p>
@@ -496,16 +489,16 @@ export default function App() {
                           onClick={() => handleCopyText(message.content, index)}
                           title="Copy response"
                         >
-                          {copiedIndex === index ? <Check size={13} style={{ color: "#10b981" }} /> : <Copy size={13} />}
+                          {copiedIndex === index ? <Check size={12} style={{ color: "#10b981" }} /> : <Copy size={12} />}
                         </button>
                       )}
                     </div>
-                    <p style={{ whiteSpace: "pre-line", marginTop: "8px" }}>{message.content}</p>
+                    <p style={{ whiteSpace: "pre-line", marginTop: "6px" }}>{message.content}</p>
                     {message.role === "assistant" &&
                     message.sources?.length > 0 ? (
-                      <div className="source-block">
-                        <p className="source-text" style={{ fontWeight: "700", fontSize: "0.82rem", margin: "0 0 8px", display: "flex", alignItems: "center", gap: "6px" }}>
-                          <FileText size={13} /> Retrieved document chunks:
+                      <div className="source-block" style={{ marginTop: "10px" }}>
+                        <p className="source-text" style={{ fontWeight: "700", fontSize: "0.8rem", margin: "0 0 6px", display: "flex", alignItems: "center", gap: "6px" }}>
+                          <FileText size={12} /> Retrieved document chunks:
                         </p>
                         {message.sources.map((source, index) => (
                           <details
@@ -520,7 +513,7 @@ export default function App() {
                                 {source.retrievalMethod || "dense"} ({(typeof source.score === "number" ? source.score.toFixed(2) : "n/a")})
                               </span>
                             </summary>
-                            <p className="source-snippet" style={{ borderLeft: "2px solid var(--accent)", paddingLeft: "8px", marginTop: "8px" }}>
+                            <p className="source-snippet" style={{ borderLeft: "2px solid var(--accent)", paddingLeft: "8px", marginTop: "6px" }}>
                               {source.pageContent}
                             </p>
                           </details>
@@ -532,9 +525,9 @@ export default function App() {
               )}
             </div>
 
-            <form className="chat-form-compact" onSubmit={handleAsk}>
+            <form className="chat-form-tight" onSubmit={handleAsk}>
               <textarea
-                rows="1"
+                rows="2"
                 value={question}
                 placeholder="Ask a question about the document..."
                 onChange={(event) => setQuestion(event.target.value)}
@@ -545,17 +538,9 @@ export default function App() {
                   }
                 }}
               />
-              <button
-                type="submit"
-                className="send-icon-btn"
-                disabled={isChatting || !question.trim()}
-                title="Send Question"
-              >
-                {isChatting ? (
-                  <span className="spinner-sm"></span>
-                ) : (
-                  <Send size={15} />
-                )}
+              <button type="submit" disabled={isChatting} style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", padding: "10px 16px" }}>
+                <Send size={15} />
+                {isChatting ? "Retrieving & Synthesizing..." : "Ask Bot"}
               </button>
             </form>
           </section>
